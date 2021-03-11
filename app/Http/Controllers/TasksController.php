@@ -46,16 +46,16 @@ class TasksController extends Controller
     {
         $task = new Task;
         
-        if (\Auth::check()) //認証済みの場合
-        {
+        //if (\Auth::check()) //認証済みの場合
+        //{
             // タスク作成ビューを表示
             return view('tasks.create', [
                 'task' => $task,
             ]);
-        }
+        //}
         
         // トップページへリダイレクトさせる
-        return redirect('/');
+        //return redirect('/');
     }
 
     /**
