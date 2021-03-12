@@ -16,21 +16,26 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = [];
-        // 認証済みの場合
-        if (\Auth::check())
-        { 
-            // ログイン中のユーザーのタスク一覧を作成日時の降順で取得
-            // = Task::all();
-            $user = \Auth::user();
-            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-            
-            // タスク一覧ビューでそれを表示
-            return view('tasks.index', [
-                'tasks' => $tasks,
-            ]);
-        }
+        if (\Auth::check()) { // 認証済みの場合
+        // ログイン中のユーザーのタスク一覧を作成日時の降順で取得
+        // = Task::all();
+        $user = \Auth::user();
+        $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
         
-        return redirect('/');
+        // タスク一覧ビューでそれを表示
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
+        
+        }
+        else
+        {
+            // タスク一覧ビューでそれを表示
+            //return view('welcome', [
+            //    'tasks' => $tasks,
+            //]);
+            return view('welcome');
+        }
     }
 
     /**
