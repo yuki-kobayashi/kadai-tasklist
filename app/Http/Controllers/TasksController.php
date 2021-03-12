@@ -28,13 +28,8 @@ class TasksController extends Controller
         ]);
         
         }
-        else
-        {
-            // タスク一覧ビューでそれを表示
-            return view('welcome', [
-                'tasks' => $tasks,
-            ]);
-        }
+        
+        return redirect('/');
     }
 
     /**
@@ -46,16 +41,10 @@ class TasksController extends Controller
     {
         $task = new Task;
         
-        //if (\Auth::check()) //認証済みの場合
-        //{
-            // タスク作成ビューを表示
-            return view('tasks.create', [
-                'task' => $task,
-            ]);
-        //}
-        
-        // トップページへリダイレクトさせる
-        //return redirect('/');
+        // タスク作成ビューを表示
+        return view('tasks.create', [
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -155,7 +144,6 @@ class TasksController extends Controller
         if (\Auth::id() === $task->user_id) 
         {
             // タスクを更新
-            //$task->user_id = $id;
             $task->status = $request->status;
             $task->content = $request->content;
             $task->save();
