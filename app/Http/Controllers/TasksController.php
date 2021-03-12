@@ -155,7 +155,7 @@ class TasksController extends Controller
         if (\Auth::id() === $task->user_id) 
         {
             // タスクを更新
-            $task->user_id = $id;
+            //$task->user_id = $id;
             $task->status = $request->status;
             $task->content = $request->content;
             $task->save();
